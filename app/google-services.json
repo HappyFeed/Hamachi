@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "930981923685",
+    "project_id": "hamachibd-b4a14",
+    "storage_bucket": "hamachibd-b4a14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930981923685:android:a8a46188c4ad815dfbaf8c",
+        "android_client_info": {
+          "package_name": "app.moviles.kamachi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930981923685-k0t9ec13vj98bkvau403qefskqcfd730.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZF-gqCy0Qzno-iZ8jrp8n3g-4txxIbIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930981923685-k0t9ec13vj98bkvau403qefskqcfd730.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
