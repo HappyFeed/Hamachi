@@ -23,6 +23,7 @@ public class EventRepositoryImpl implements EventRepositoryInterface{
     @Override
     public void save(Event event) {
         db.collection("events").document(event.getIdEvent()).set(event);
+        //db.collection("events").document(event.getIdEvent()).collection("eventParticipant").document().set()
     }
 
     @Override

@@ -2,6 +2,7 @@ package app.moviles.kamachi.repository;
 
 import java.util.List;
 
+import app.moviles.kamachi.actions.Actions;
 import app.moviles.kamachi.model.User;
 
 public interface UserRepositoryInterface {
@@ -14,6 +15,6 @@ public interface UserRepositoryInterface {
 
     public void delete(String id);
 
-    public List<User> findAll();
+    public void findAll(Actions.OnUserList onResponse);
 
 }

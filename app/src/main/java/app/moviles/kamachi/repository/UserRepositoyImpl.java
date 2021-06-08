@@ -1,5 +1,6 @@
 package app.moviles.kamachi.repository;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -8,13 +9,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.moviles.kamachi.actions.Actions;
 import app.moviles.kamachi.model.User;
 
 public class UserRepositoyImpl implements UserRepositoryInterface{
 
     FirebaseFirestore db;
-    private List<User> users;
+    private ArrayList<User> users;
     private User u;
+
 
     public UserRepositoyImpl() {
         this.db = FirebaseFirestore.getInstance();
@@ -36,6 +39,8 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
         db.collection("users").document(user.getUserId()).set(user);
     }
 
+
+
     @Override
     public User findById(String id) {
         db.collection("users").document(id).get()
@@ -52,16 +57,29 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
         db.collection("users").document(id).delete();
     }
 
-    @Override
-    public List<User> findAll() {
+
+
+    public void findAll(Actions.OnUserList onResponse) {
+
         db.collection("users").limit(10).get().addOnSuccessListener(
                 command -> {
                     for(DocumentSnapshot doc: command.getDocuments()){
                         User u = doc.toObject(User.class);
                         users.add(u);
+                        onResponse.onFindAll(users);
                     }
                 }
         );
-        return users;
     }
+
+    public void example(){
+        findAll(
+                userList -> {
+
+                }
+        );
+        Log.e(">>", "");
+    }
+
+
 }

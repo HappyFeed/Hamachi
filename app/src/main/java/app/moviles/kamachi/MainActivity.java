@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         User p = new User("alejo", "alejomam@gmail.com", "1234", UserType.client);
         Event e = new Event("epa", "prueba", new Date(2020, 03, 27), EventType.YOGA, "asdasdas", 20000, 10);
         e.setEventOwner(p);
-        p.addEvent(e);
+        uri.save(p);
+        eri.save(e);
     }
 }

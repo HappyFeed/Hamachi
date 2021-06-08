@@ -12,7 +12,6 @@ public class User {
     private String thelephone;
     private String password;
     private String profilePic;
-    private List<Event> userEvents;
     private UserType userType;
 
     public User() {
@@ -24,7 +23,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.userType = userType;
-        userEvents = new ArrayList<Event>();
     }
 
     public String getProfilePic() {
@@ -49,10 +47,6 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public List<Event> getUserEvents() {
-        return userEvents;
     }
 
     public UserType getUserType() {
@@ -83,15 +77,8 @@ public class User {
         this.password = password;
     }
 
-    public void setUserEvents(List<Event> userEvents) {
-        this.userEvents = userEvents;
-    }
-
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
 
-    public void addEvent(Event event){
-        userEvents.add(event);
-    }
 }

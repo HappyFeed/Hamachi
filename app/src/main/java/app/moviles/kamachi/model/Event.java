@@ -1,5 +1,6 @@
 package app.moviles.kamachi.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -13,10 +14,16 @@ public class Event {
     private EventType type;
     private String url;
     private double price;
+
+
+
     private int maxParticipants;
     private User eventOwner;
-    private User[] eventParticipants;
-    private String[] eventImage;
+    private ArrayList<User> eventParticipants;
+    private ArrayList<String> eventImage;
+
+    public Event() {
+    }
 
     public Event(String eventName, String description, Date dateEvent, EventType type, String url, double price, int maxParticipants) {
         this.idEvent = UUID.randomUUID().toString();
@@ -27,7 +34,15 @@ public class Event {
         this.url = url;
         this.price = price;
         this.maxParticipants = maxParticipants;
-        this.eventParticipants = new User[this.maxParticipants];
+        this.eventParticipants = new ArrayList<User>();
+    }
+
+    public ArrayList<User> getEventParticipants() {
+        return eventParticipants;
+    }
+
+    public ArrayList<String> getEventImage() {
+        return eventImage;
     }
 
     public String getIdEvent() {
@@ -66,14 +81,6 @@ public class Event {
         return eventOwner;
     }
 
-    public User[] getEventParticipants() {
-        return eventParticipants;
-    }
-
-    public String[] getEventImage() {
-        return eventImage;
-    }
-
     public void setIdEvent(String idEvent) {
         this.idEvent = idEvent;
     }
@@ -110,11 +117,11 @@ public class Event {
         this.eventOwner = eventOwner;
     }
 
-    public void setEventParticipants(User[] eventParticipants) {
+    public void setEventParticipants(ArrayList<User> eventParticipants) {
         this.eventParticipants = eventParticipants;
     }
 
-    public void setEventImage(String[] eventImage) {
+    public void setEventImage(ArrayList<String> eventImage) {
         this.eventImage = eventImage;
     }
 }
