@@ -9,4 +9,8 @@ public class Actions {
     public interface OnUserList{
          void onFindAll(ArrayList<User> userList);
     }
+
+    public interface OnFindById{
+        void onFindById(User user);
+    }
 }

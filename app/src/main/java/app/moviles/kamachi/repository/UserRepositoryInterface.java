@@ -11,7 +11,7 @@ public interface UserRepositoryInterface {
 
     public void edit(User user);
 
-    public User findById(String id);
+    public void findById(Actions.OnFindById onFindById, String id);
 
     public void delete(String id);
 

@@ -42,14 +42,14 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
 
 
     @Override
-    public User findById(String id) {
+    public void findById(Actions.OnFindById onFindById, String id) {
         db.collection("users").document(id).get()
                 .addOnSuccessListener(
                         command -> {
-                            u = command.toObject(User.class);
+                            User use = command.toObject(User.class);
+                            onFindById.onFindById(use);
                         }
                 );
-        return u;
     }
 
     @Override
@@ -81,5 +81,17 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
         Log.e(">>", "");
     }
 
+    public void example1(){
+        findById(
+                userFind -> {
+                    u = ajam(userFind);
+                }, "adsad"
+        );
+        Log.e(">>", "");
+    }
+
+    public User ajam(User u){
+        return u;
+    }
 
 }
