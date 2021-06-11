@@ -72,15 +72,13 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
         );
     }
 
-    public void example(){
-        findAll(
-                userList -> {
-
-                }
-        );
-        Log.e(">>", "");
+    public ArrayList<User> getUsers(){
+        
+        return users;
     }
 
+
+   /*
     public void example1(){
         findById(
                 userFind -> {
@@ -88,10 +86,6 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
                 }, "adsad"
         );
         Log.e(">>", "");
-    }
-
-    public User ajam(User u){
-        return u;
-    }
+    }*/
 
 }
