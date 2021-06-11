@@ -8,7 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class EventInformation extends Fragment {
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import app.moviles.kamachi.comunication.ServiceEventInfo;
+
+public class EventInformation extends Fragment implements ServiceEventInfo {
+
+    private FirebaseFirestore db;
 
     public EventInformation() {
     }
@@ -33,5 +39,10 @@ public class EventInformation extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_event_information, container, false);
+    }
+
+    @Override
+    public void enviarDatos(String eventId, String ownerId) {
+
     }
 }

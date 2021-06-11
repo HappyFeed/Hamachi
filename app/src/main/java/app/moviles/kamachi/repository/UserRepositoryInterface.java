@@ -1,5 +1,6 @@
 package app.moviles.kamachi.repository;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import app.moviles.kamachi.actions.Actions;
@@ -16,5 +17,7 @@ public interface UserRepositoryInterface {
     public void delete(String id);
 
     public void findAll(Actions.OnUserList onResponse);
+
+    public void addUserProfilePic(User user) throws FileNotFoundException;
 
 }

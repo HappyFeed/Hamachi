@@ -5,16 +5,22 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import app.moviles.kamachi.actions.Actions;
+import app.moviles.kamachi.model.Event;
 import app.moviles.kamachi.model.User;
 
 public class UserRepositoyImpl implements UserRepositoryInterface{
 
     FirebaseFirestore db;
+    FirebaseStorage storage;
     private ArrayList<User> users;
     private User u;
 
@@ -22,6 +28,7 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
     public UserRepositoyImpl() {
         this.db = FirebaseFirestore.getInstance();
         this.users = new ArrayList<User>();
+        this.storage = FirebaseStorage.getInstance();
     }
 
     @Override
@@ -73,10 +80,24 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
     }
 
     public ArrayList<User> getUsers(){
-        
         return users;
     }
 
+    @Override
+    public void addUserProfilePic(User user) throws FileNotFoundException {
+        String path = user.getProfilePic();
+        FileInputStream fis = null;
+        fis= new FileInputStream(new File(path));
+        storage.getReference().child("postUser").child(path).putStream(fis).addOnSuccessListener(
+                runnable -> {
+                    edit(user);
+                }
+        ).addOnFailureListener(
+                command -> {
+                    Log.e(">>>","no se pudo guardar la imagen");
+                }
+        );
+    }
 
    /*
     public void example1(){

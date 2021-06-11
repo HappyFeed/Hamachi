@@ -18,9 +18,8 @@ public class Event {
 
 
     private int maxParticipants;
-    private User eventOwner;
-    private ArrayList<User> eventParticipants;
-    private ArrayList<String> eventImage;
+    private String eventOwnerId;
+    private String eventImage;
 
     public Event() {
     }
@@ -34,14 +33,14 @@ public class Event {
         this.url = url;
         this.price = price;
         this.maxParticipants = maxParticipants;
-        this.eventParticipants = new ArrayList<User>();
+
     }
 
-    public ArrayList<User> getEventParticipants() {
-        return eventParticipants;
+    public String getEventOwnerId() {
+        return eventOwnerId;
     }
 
-    public ArrayList<String> getEventImage() {
+    public String getEventImage() {
         return eventImage;
     }
 
@@ -77,8 +76,8 @@ public class Event {
         return maxParticipants;
     }
 
-    public User getEventOwner() {
-        return eventOwner;
+    public void setEventOwnerId(String eventOwnerId) {
+        this.eventOwnerId = eventOwnerId;
     }
 
     public void setIdEvent(String idEvent) {
@@ -113,15 +112,7 @@ public class Event {
         this.maxParticipants = maxParticipants;
     }
 
-    public void setEventOwner(User eventOwner) {
-        this.eventOwner = eventOwner;
-    }
-
-    public void setEventParticipants(ArrayList<User> eventParticipants) {
-        this.eventParticipants = eventParticipants;
-    }
-
-    public void setEventImage(ArrayList<String> eventImage) {
+    public void setEventImage(String eventImage) {
         this.eventImage = eventImage;
     }
 }

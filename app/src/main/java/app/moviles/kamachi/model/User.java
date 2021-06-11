@@ -9,7 +9,7 @@ public class User {
     private String userId;
     private String userName;
     private String email;
-    private String thelephone;
+    private String telephone;
     private String password;
     private String profilePic;
     private UserType userType;
@@ -42,7 +42,7 @@ public class User {
     }
 
     public String getThelephone() {
-        return thelephone;
+        return telephone;
     }
 
     public String getPassword() {
@@ -70,7 +70,7 @@ public class User {
     }
 
     public void setThelephone(String thelephone) {
-        this.thelephone = thelephone;
+        this.telephone = thelephone;
     }
 
     public void setPassword(String password) {
