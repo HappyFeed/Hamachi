@@ -8,7 +8,7 @@
     tools:context=".activity_options">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonReturn"
         android:layout_width="55dp"
         android:layout_height="57dp"
         android:layout_marginTop="24dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/homeBtn"
         android:layout_width="0dp"
         android:layout_height="52dp"
         android:layout_marginStart="70dp"
@@ -37,10 +37,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonReturn" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/eventBtn"
         android:layout_width="0dp"
         android:layout_height="53dp"
         android:layout_marginStart="70dp"
@@ -55,10 +55,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/homeBtn" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/editProfileBtn"
         android:layout_width="0dp"
         android:layout_height="58dp"
         android:layout_marginStart="70dp"
@@ -73,15 +73,15 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/eventBtn" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/paymentBtn"
         android:layout_width="268dp"
         android:layout_height="66dp"
+        android:layout_marginEnd="70dp"
         android:layout_marginStart="70dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="70dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/poppinsregular"
@@ -91,15 +91,14 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
+        app:layout_constraintTop_toBottomOf="@+id/editProfileBtn" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/closeBtn"
         android:layout_width="0dp"
         android:layout_height="73dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="70dp"
+        android:layout_marginStart="70dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:backgroundTint="#FFFFFF"
         android:fontFamily="@font/poppinsregular"
@@ -107,7 +106,8 @@
         android:textAlignment="textStart"
         android:textColor="#FF0000"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/homeBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

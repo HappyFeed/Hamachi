@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity_editprofile">
 
+    <Button
+        android:id="@+id/optionsBtn"
+        android:layout_width="55dp"
+        android:layout_height="57dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:backgroundTint="#FFFFFF"
+        app:icon="@android:drawable/ic_menu_sort_by_size"
+        app:iconTint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -21,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imgEditProfile"
         android:layout_width="176dp"
         android:layout_height="186dp"
         android:layout_marginTop="10dp"
@@ -32,7 +45,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/imgButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="160dp"
@@ -46,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName6"
+        android:id="@+id/editNameTxt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
@@ -63,10 +76,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/imgEditProfile" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName7"
+        android:id="@+id/editDescriptionTxt"
         android:layout_width="342dp"
         android:layout_height="203dp"
         android:layout_marginStart="35dp"
@@ -80,10 +93,10 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+        app:layout_constraintTop_toBottomOf="@+id/editNameTxt" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/saveChangesBtn"
         android:layout_width="116dp"
         android:layout_height="64dp"
         android:layout_marginTop="20dp"
@@ -98,5 +111,5 @@
         app:iconTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintTop_toBottomOf="@+id/editDescriptionTxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>
