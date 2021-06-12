@@ -17,10 +17,11 @@ public class User {
     public User() {
     }
 
-    public User(String userName, String email, String password, UserType userType) {
+    public User(String userName, String email, String telephone, String password, UserType userType) {
         this.userId = UUID.randomUUID().toString();
         this.userName = userName;
         this.email = email;
+        this.telephone = telephone;
         this.password = password;
         this.userType = userType;
     }

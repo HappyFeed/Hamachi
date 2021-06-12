@@ -14,15 +14,17 @@
         <activity android:name=".activity_paymethod" />
         <activity android:name=".activity_options" />
         <activity android:name=".activity_register" />
-        <activity android:name=".loginActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".loginActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
+        <activity android:name=".MenuActivity" />
+
+        <activity android:name=".MainActivity"/>
+
     </application>
 
 </manifest>
