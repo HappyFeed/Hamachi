@@ -20,6 +20,8 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.zip.Inflater;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import app.moviles.kamachi.model.User;
 import app.moviles.kamachi.repository.UserRepositoryInterface;
 import app.moviles.kamachi.repository.UserRepositoyImpl;
@@ -30,6 +32,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private TextView namePtxt;
     private TextView descriptiontxt;
     private ImageView imgProfile;
+    private RecyclerView eventViewList;
+    private LinearLayoutManager layoutManger;
+    private EventAdapter adapter;
 
     private FirebaseAuth auth;
     private FirebaseStorage storage;
@@ -63,8 +68,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         namePtxt = root.findViewById(R.id.namePTxt);
         descriptiontxt = root.findViewById(R.id.descriptionText);
         imgProfile = root.findViewById(R.id.imgProfile);
+        eventViewList = root.findViewById(R.id.eventViewList);
+
         btnOptions.setOnClickListener(this);
 
+        layoutManger = new LinearLayoutManager(getContext());
+        eventViewList.setLayoutManager(layoutManger);
+
+        adapter = new EventAdapter();
+        eventViewList.setAdapter(adapter);
         loadUserInfo();
 
         return root;

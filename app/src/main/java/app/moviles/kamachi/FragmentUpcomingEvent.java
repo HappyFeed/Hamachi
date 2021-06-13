@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,9 @@ import android.widget.Button;
 
 public class FragmentUpcomingEvent extends Fragment implements View.OnClickListener {
 
-    private Button btnInscrition;
+    private RecyclerView listView;
+    private LinearLayoutManager layoutManger;
+    private EventUpcomingAdapter adapter;
 
     public FragmentUpcomingEvent() {
         // Required empty public constructor
@@ -30,8 +34,15 @@ public class FragmentUpcomingEvent extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_upcoming_event, container, false);
-        btnInscrition = root.findViewById(R.id.btnInscrition);
-        btnInscrition.setOnClickListener(this);
+        listView = root.findViewById(R.id.listView);
+
+        layoutManger = new LinearLayoutManager(getContext());
+        listView.setLayoutManager(layoutManger);
+
+        adapter = new EventUpcomingAdapter();
+        listView.setAdapter(adapter);
+
+
         return root;
     }
 
@@ -39,10 +50,7 @@ public class FragmentUpcomingEvent extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnInscrition:
-                Intent i = new Intent(getContext(), activity_inscription.class);
-                startActivity(i);
-                break;
+
         }
 
     }

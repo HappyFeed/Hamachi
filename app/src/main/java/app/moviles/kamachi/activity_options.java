@@ -72,11 +72,5 @@ public class activity_options extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    public void showFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fragmentContainer, fragment);
-        transaction.commit();
-    }
 
 }

@@ -15,13 +15,23 @@ public class Event {
     private String url;
     private double price;
 
-
-
     private int maxParticipants;
     private String eventOwnerId;
     private String eventImage;
+    private String nameInstructor;
 
     public Event() {
+    }
+
+    public Event(String eventName){
+        this.idEvent = UUID.randomUUID().toString();
+        this.eventName = eventName;
+    }
+
+    public Event(String nameInstructor, String eventImage){
+        this.idEvent = UUID.randomUUID().toString();
+        this.nameInstructor = nameInstructor;
+        this.eventImage = eventImage;
     }
 
     public Event(String eventName, String description, Date dateEvent, EventType type, String url, double price, int maxParticipants) {
@@ -114,5 +124,13 @@ public class Event {
 
     public void setEventImage(String eventImage) {
         this.eventImage = eventImage;
+    }
+
+    public String getNameInstructor() {
+        return nameInstructor;
+    }
+
+    public void setNameInstructor(String nameInstructor) {
+        this.nameInstructor = nameInstructor;
     }
 }
