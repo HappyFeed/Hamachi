@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class activity_options extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonReturn;
@@ -63,6 +65,7 @@ public class activity_options extends AppCompatActivity implements View.OnClickL
                 startActivity(intent);
                 break;
             case R.id.closeBtn:
+                FirebaseAuth.getInstance().signOut();
                 Intent intent1 = new Intent(this, loginActivity.class);
                 startActivity(intent1);
                 break;
@@ -75,4 +78,5 @@ public class activity_options extends AppCompatActivity implements View.OnClickL
         transaction.replace(R.id.fragmentContainer, fragment);
         transaction.commit();
     }
+
 }

@@ -5,20 +5,40 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.zip.Inflater;
 
+import app.moviles.kamachi.model.User;
+import app.moviles.kamachi.repository.UserRepositoryInterface;
+import app.moviles.kamachi.repository.UserRepositoyImpl;
+
 public class HomeFragment extends Fragment implements View.OnClickListener{
+
     private Button btnOptions;
     private TextView namePtxt;
     private TextView descriptiontxt;
+    private ImageView imgProfile;
+
+    private FirebaseAuth auth;
+    private FirebaseStorage storage;
+    private FirebaseFirestore db;
+
+    private UserRepositoryInterface uri;
 
     public HomeFragment() {
+        uri = new UserRepositoyImpl();
         // Required empty public constructor
     }
 
@@ -33,12 +53,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        auth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         btnOptions = root.findViewById(R.id.btnOptions);
         namePtxt = root.findViewById(R.id.namePTxt);
         descriptiontxt = root.findViewById(R.id.descriptionText);
-
+        imgProfile = root.findViewById(R.id.imgProfile);
         btnOptions.setOnClickListener(this);
+
+        loadUserInfo();
+
         return root;
     }
 
@@ -50,5 +78,39 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 startActivity(i);
                 break;
         }
+    }
+
+    public void loadUserInfo(){
+        db.collection("users").document(FirebaseAuth.getInstance().getUid()).get()
+                .addOnSuccessListener(
+                        command -> {
+                            User userFind = command.toObject(User.class);
+                            namePtxt.setText(userFind.getUserName());
+                            if(userFind.getDescripion() != null){
+                                descriptiontxt.setText(userFind.getDescripion());
+                            }
+                            String path ="";
+                            if(userFind.getProfilePic() == null){
+                                path="fotoPerfil.jpg";
+                                storage.getReference().child(path).getDownloadUrl()
+                                        .addOnSuccessListener(
+                                                command1 -> {
+                                                    String url = command1.toString();
+                                                    Glide.with(this).load(url).centerCrop().into(imgProfile);
+                                                }
+                                        );
+                            }else{
+                                path =userFind.getProfilePic();
+                                storage.getReference().child("postUser").child(path).getDownloadUrl()
+                                        .addOnSuccessListener(
+                                                command1 -> {
+                                                    String url = command1.toString();
+                                                    Glide.with(this).load(url).centerCrop().into(imgProfile);
+                                                }
+                                        );
+                            }
+
+                        }
+                );
     }
 }

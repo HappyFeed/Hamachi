@@ -18,6 +18,6 @@ public interface UserRepositoryInterface {
 
     public void findAll(Actions.OnUserList onResponse);
 
-    public void addUserProfilePic(User user) throws FileNotFoundException;
+    public void addUserProfilePic(String path) throws FileNotFoundException;
 
 }

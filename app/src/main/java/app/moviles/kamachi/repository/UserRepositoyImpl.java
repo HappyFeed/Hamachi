@@ -84,29 +84,8 @@ public class UserRepositoyImpl implements UserRepositoryInterface{
     }
 
     @Override
-    public void addUserProfilePic(User user) throws FileNotFoundException {
-        String path = user.getProfilePic();
-        FileInputStream fis = null;
-        fis= new FileInputStream(new File(path));
-        storage.getReference().child("postUser").child(path).putStream(fis).addOnSuccessListener(
-                runnable -> {
-                    edit(user);
-                }
-        ).addOnFailureListener(
-                command -> {
-                    Log.e(">>>","no se pudo guardar la imagen");
-                }
-        );
-    }
+    public void addUserProfilePic(String path) throws FileNotFoundException {
 
-   /*
-    public void example1(){
-        findById(
-                userFind -> {
-                    u = ajam(userFind);
-                }, "adsad"
-        );
-        Log.e(">>", "");
-    }*/
+    }
 
 }

@@ -1,9 +1,12 @@
 package app.moviles.kamachi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +29,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+        }, 1);
+
         FirebaseUser fireUser = FirebaseAuth.getInstance().getCurrentUser();
         if(fireUser != null){
             Intent i = new Intent(this, MenuActivity.class);
@@ -46,25 +54,34 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.loginBtn:
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                        editTextPersonName.getText().toString(),
-                        editTextPassword.getText().toString()
-                ).addOnSuccessListener(
-                        command -> {
-                            Intent i = new Intent(this, MenuActivity.class);
-                            startActivity(i);
-                        }
-                ).addOnFailureListener(
-                        command -> {
-                            Toast.makeText(this,command.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                );
-                break;
-            case R.id.registerBtn:
-                Intent i = new Intent(this, activity_register.class);
-                startActivity(i);
+        try {
+
+
+            switch (v.getId()) {
+
+                case R.id.loginBtn:
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(
+                            editTextPersonName.getText().toString(),
+                            editTextPassword.getText().toString()
+                    ).addOnSuccessListener(
+                            command -> {
+                                Intent i = new Intent(this, MenuActivity.class);
+                                startActivity(i);
+                            }
+                    ).addOnFailureListener(
+                            command -> {
+                                Toast.makeText(this, command.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                    );
+                    break;
+                case R.id.registerBtn:
+                    Intent i = new Intent(this, activity_register.class);
+                    startActivity(i);
+
+
+            }
+        }catch (Exception e){
+            Log.e(">>>", "empty");
         }
     }
 }

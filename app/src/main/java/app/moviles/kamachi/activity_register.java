@@ -14,8 +14,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import app.moviles.kamachi.model.User;
 import app.moviles.kamachi.model.UserType;
+import app.moviles.kamachi.repository.UserRepositoryInterface;
+import app.moviles.kamachi.repository.UserRepositoyImpl;
 
 public class activity_register extends AppCompatActivity implements View.OnClickListener{
 
@@ -26,6 +32,8 @@ public class activity_register extends AppCompatActivity implements View.OnClick
     private EditText editTextPasswordC;
     private Button registrarBtn;
 
+    private UserRepositoryInterface uri;
+
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private FirebaseAuth auth;
@@ -34,6 +42,8 @@ public class activity_register extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        uri = new UserRepositoyImpl();
 
         editTextUserName = findViewById(R.id.editTextUserName);
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -57,6 +67,7 @@ public class activity_register extends AppCompatActivity implements View.OnClick
                 ).addOnSuccessListener(
                         command -> {
                             User u = new User(
+                                    FirebaseAuth.getInstance().getUid(),
                                     editTextUserName.getText().toString(),
                                     editTextEmail.getText().toString(),
                                     editTextTelephone.getText().toString(),
@@ -70,6 +81,19 @@ public class activity_register extends AppCompatActivity implements View.OnClick
                                                 startActivity(i);
                                             }
                                     );
+
+                            try {
+                                FileInputStream fis = null;
+                                fis= new FileInputStream(new File("@//res//drawable/foto_perfil.jpg"));
+                                storage.getReference().child("postUser").child(FirebaseAuth.getInstance().getUid()).putStream(fis)
+                                        .addOnFailureListener(
+                                                command2 -> {
+                                                    Log.e(">>>","no se pudo guardar la imagen");
+                                                }
+                                        );
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
                         }
                 ).addOnFailureListener(
                         command -> {
