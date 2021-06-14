@@ -37,10 +37,11 @@
 
     <ImageView
         android:id="@+id/imgEvent2"
-        android:layout_width="408dp"
-        android:layout_height="291dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="426dp"
+        android:layout_height="245dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView2"
         tools:srcCompat="@tools:sample/avatars" />
@@ -57,4 +58,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/black" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

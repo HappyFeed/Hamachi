@@ -16,43 +16,47 @@
         android:text="Registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintHorizontal_bias="0.018"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgEvent2" />
+        app:layout_constraintTop_toBottomOf="@+id/imgEvent2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/nameTextView2"
-        android:layout_width="195dp"
-        android:layout_height="wrap_content"
+        android:layout_width="207dp"
+        android:layout_height="33dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="44dp"
         android:text="Nombre Instructor"
         android:textAlignment="viewStart"
         android:textColor="#000000"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imageViewColabPic2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgEvent2"
-        android:layout_width="408dp"
-        android:layout_height="291dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="407dp"
+        android:layout_height="241dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView2"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
         android:id="@+id/imageViewColabPic2"
-        android:layout_width="64dp"
-        android:layout_height="61dp"
+        android:layout_width="53dp"
+        android:layout_height="46dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="19dp"
         app:layout_constraintEnd_toStartOf="@+id/nameTextView2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/black" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

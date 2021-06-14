@@ -62,11 +62,13 @@ public class EventUpcomingAdapter extends RecyclerView.Adapter<EventUpcomingView
                     }
                 }
         );
+
         db.collection("users").document(events.get(position).getEventOwnerId()).get()
                 .addOnSuccessListener(
                         command -> {
                             User u = command.toObject(User.class);
                             holder.getNameTextView().setText(u.getUserName());
+
                             String pathP = u.getProfilePic();
                             if(u.getProfilePic() == null){
                                 pathP="fotoPerfil.jpg";
@@ -121,8 +123,8 @@ public class EventUpcomingAdapter extends RecyclerView.Adapter<EventUpcomingView
         return events.size();
     }
 
-    public long lastOne(){
-        return events.get(events.size()-1).getDateEvent();
+    public String lastOne(){
+        return events.get(events.size()-1).getEventName();
     }
 
     public void addEvent(Event event){

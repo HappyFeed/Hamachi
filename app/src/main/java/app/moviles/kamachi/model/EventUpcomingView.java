@@ -23,9 +23,10 @@ public class EventUpcomingView extends RecyclerView.ViewHolder{
             informationBtn2 = root.findViewById(R.id.informationBtn2);
             imgEvent2 = root.findViewById(R.id.imgEvent2);
             imageViewColabPic2 = root.findViewById(R.id.imageViewColabPic2);
+
         }
 
-        public ConstraintLayout getRoot() {
+    public ConstraintLayout getRoot() {
             return root;
         }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kamachi</string>
+    <string name="app_name">Hamachi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="regresar">Regresar</string>

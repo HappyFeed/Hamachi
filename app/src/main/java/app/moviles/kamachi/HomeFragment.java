@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Even
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        prueba();
+        //prueba();
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         btnOptions = root.findViewById(R.id.btnOptions);

@@ -69,7 +69,7 @@ public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdap
 
         searchView.setOnQueryTextListener(this);
 
-        cargarEventos( new Date(2021, 01,01).getTime());
+        cargarEventos("*");
 
         listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -79,7 +79,7 @@ public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdap
                     Log.e(">>>", "TOP");
                 }else if(!recyclerView.canScrollVertically(1)&& dy>0){
                     Log.e(">>>", "BOTTOM");
-                    long ultimo = adapter.lastOne();
+                    String ultimo = adapter.lastOne();
                     cargarEventos(ultimo);
 
                 }
@@ -92,8 +92,8 @@ public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdap
 
 
 
-    public void cargarEventos(long start){
-        db.collection("events").limit(3).get()
+    public void cargarEventos(String start){
+        db.collection("events").orderBy("eventName").limit(2).startAfter(start).get()
                 .addOnSuccessListener(
                         command -> {
                             for(DocumentSnapshot doc2: command.getDocuments()) {
