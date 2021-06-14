@@ -25,7 +25,7 @@ import app.moviles.kamachi.model.Event;
 import app.moviles.kamachi.model.User;
 
 
-public class FragmentUpcomingEvent extends Fragment {
+public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdapter.OnRegistClick {
 
     private RecyclerView listView;
     private LinearLayoutManager layoutManger;
@@ -60,6 +60,7 @@ public class FragmentUpcomingEvent extends Fragment {
         listView.setLayoutManager(layoutManger);
 
         adapter = new EventUpcomingAdapter();
+        adapter.setListener(this);
         listView.setAdapter(adapter);
 
         cargarEventos( new Date(2021, 01,01).getTime());
@@ -100,6 +101,13 @@ public class FragmentUpcomingEvent extends Fragment {
                     Toast.makeText(getContext(), "No tienes eventos CERCA", Toast.LENGTH_SHORT).show();
                 }
         );
+    }
+
+    @Override
+    public void OnEventRegisItemClick(Event e) {
+        Intent i = new Intent(getActivity(), activity_inscription.class);
+        i.putExtra("event", e);
+        startActivity(i);
     }
 }
 

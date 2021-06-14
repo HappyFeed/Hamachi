@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Even
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         btnOptions = root.findViewById(R.id.btnOptions);
         namePtxt = root.findViewById(R.id.namePTxt);
-        descriptiontxt = root.findViewById(R.id.descriptionText);
+        descriptiontxt = root.findViewById(R.id.descriptiontxt);
         imgProfile = root.findViewById(R.id.imgProfile);
         eventViewList = root.findViewById(R.id.eventViewList);
 

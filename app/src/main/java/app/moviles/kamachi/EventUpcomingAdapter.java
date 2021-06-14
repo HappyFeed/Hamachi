@@ -28,6 +28,7 @@ public class EventUpcomingAdapter extends RecyclerView.Adapter<EventUpcomingView
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private View row;
+    private OnRegistClick listener;
 
     public EventUpcomingAdapter() {
         events = new ArrayList<>();
@@ -49,6 +50,13 @@ public class EventUpcomingAdapter extends RecyclerView.Adapter<EventUpcomingView
 
     @Override
     public void onBindViewHolder(@NonNull EventUpcomingView holder, int position) {
+        holder.getInformationBtn().setOnClickListener(
+                v -> {
+                    if(listener != null){
+                        listener.OnEventRegisItemClick(events.get(position));
+                    }
+                }
+        );
         db.collection("users").document(events.get(position).getEventOwnerId()).get()
                 .addOnSuccessListener(
                         command -> {
@@ -116,4 +124,13 @@ public class EventUpcomingAdapter extends RecyclerView.Adapter<EventUpcomingView
         events.add(event);
         notifyDataSetChanged();
     }
+
+    public interface OnRegistClick{
+        void OnEventRegisItemClick(Event e);
+    }
+
+    public void setListener(EventUpcomingAdapter.OnRegistClick onRegistClick){
+        listener = onRegistClick;
+    }
+
 }
