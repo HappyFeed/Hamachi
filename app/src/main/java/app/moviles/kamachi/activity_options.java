@@ -54,6 +54,7 @@ public class activity_options extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.eventBtn:
                 Intent intent4 = new Intent(this, MenuActivity.class);
+                intent4.putExtra("showEvent", "2");
                 startActivity(intent4);
                 break;
             case R.id.editProfileBtn:

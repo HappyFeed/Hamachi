@@ -46,6 +46,8 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser fireUser = FirebaseAuth.getInstance().getCurrentUser();
         if(fireUser != null){
             Intent i = new Intent(this, MenuActivity.class);
+            i.putExtra("showEvent", "1");
+
             startActivity(i);
         }
 
@@ -79,6 +81,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     ).addOnSuccessListener(
                             command -> {
                                 Intent i = new Intent(this, MenuActivity.class);
+                                i.putExtra("showEvent", "1");
                                 startActivity(i);
                             }
                     ).addOnFailureListener(

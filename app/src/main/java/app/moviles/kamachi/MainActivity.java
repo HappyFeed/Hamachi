@@ -2,6 +2,7 @@ package app.moviles.kamachi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import java.time.Month;
@@ -18,18 +19,13 @@ import app.moviles.kamachi.repository.UserRepositoyImpl;
 
 public class MainActivity extends AppCompatActivity {
 
-    private UserRepositoryInterface uri;
-    private EventRepositoryInterface eri;
-
-    public MainActivity(){
-        uri = new UserRepositoyImpl();
-        eri = new EventRepositoryImpl();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        Intent i = new Intent(this, loginActivity.class);
+        startActivity(i);
+        finish();
     }
 
 

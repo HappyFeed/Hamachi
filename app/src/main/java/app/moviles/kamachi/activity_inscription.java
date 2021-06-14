@@ -80,6 +80,7 @@ public class activity_inscription extends AppCompatActivity implements View.OnCl
                     break;
                 case R.id.btnReturn:
                     Intent intent = new Intent(this, MenuActivity.class);
+                    intent.putExtra("showEvent","2");
                     startActivity(intent);
 
                     break;

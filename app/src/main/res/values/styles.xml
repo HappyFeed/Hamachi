@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@style/Theme.AppCompat">
+
+    </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:windowBackground">@drawable/background_slash</item>
+    </style>
+</resources>

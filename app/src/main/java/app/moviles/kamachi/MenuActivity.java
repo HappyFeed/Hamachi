@@ -27,7 +27,13 @@ public class MenuActivity extends AppCompatActivity {
         homeFragment = homeFragment.newInstance();
         navigator = findViewById(R.id.navigator);
 
-        showFragment(homeFragment);
+        String show = getIntent().getStringExtra("showEvent");
+        System.out.println(show);
+        if(show.equals("2")){
+            showFragment(fragmentEvent);
+        }else{
+            showFragment(homeFragment);
+        }
 
         navigator.setOnNavigationItemSelectedListener(
                 (menuItem)->{
