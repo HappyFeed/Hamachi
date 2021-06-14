@@ -109,7 +109,7 @@ public class EventRepositoryImpl implements EventRepositoryInterface{
 
     @Override
     public void addParticipant(Event e ,String id, String name, String email) {
-        db.collection("events").document(e.getIdEvent()).collection("eventParticipants").document(id).set(new Participant(name, email));
+        db.collection("events").document(e.getIdEvent()).collection("eventParticipants").document(id).set(new Participant(id, name, email));
     }
 
     public void listParticipants(Event e){

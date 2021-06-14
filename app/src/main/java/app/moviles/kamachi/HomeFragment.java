@@ -12,9 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -22,7 +25,12 @@ import java.util.zip.Inflater;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import app.moviles.kamachi.model.Event;
+import app.moviles.kamachi.model.EventType;
+import app.moviles.kamachi.model.Participant;
 import app.moviles.kamachi.model.User;
+import app.moviles.kamachi.model.UserType;
 import app.moviles.kamachi.repository.UserRepositoryInterface;
 import app.moviles.kamachi.repository.UserRepositoyImpl;
 
@@ -77,7 +85,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         adapter = new EventAdapter();
         eventViewList.setAdapter(adapter);
+
+        cargarEventos("*");
+
+        eventViewList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled( RecyclerView recyclerView, int dx, int dy) {
+                if(!recyclerView.canScrollVertically(-1)&& dy<0){
+                    Log.e(">>>", "TOP");
+                }else if(!recyclerView.canScrollVertically(1)&& dy>0){
+                    Log.e(">>>", "BOTTOM");
+                    String ultimo = adapter.lastEvent();
+                    cargarEventos(ultimo);
+
+                }
+            }
+        });
+
+        //prueba();
         loadUserInfo();
+
 
         return root;
     }
@@ -90,6 +118,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 startActivity(i);
                 break;
         }
+    }
+
+    public void prueba(){
+        System.out.println("entro a la prueba");
+        User u = new User("qwe", "vojabes", "vojabes@gmail.com","123","123456", UserType.collaborator);
+        Event e = new Event("prueba", "prueba vojabes", EventType.YOGA,null,2000,10);
+        e.setEventOwnerId(u.getUserId());
+        db.collection("users").document(u.getUserId()).set(u);
+        db.collection("events").document(e.getIdEvent()).set(e);
+        db.collection("events").document(e.getIdEvent()).collection("eventParticipants").document(FirebaseAuth.getInstance().getUid()).set(new Participant(FirebaseAuth.getInstance().getUid(), "alejo","a@co.com"));
+
     }
 
     public void loadUserInfo(){
@@ -108,7 +147,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                                         .addOnSuccessListener(
                                                 command1 -> {
                                                     String url = command1.toString();
-                                                    Glide.with(this).load(url).centerCrop().into(imgProfile);
+                                                    Glide.with(this).load(url).apply(RequestOptions.circleCropTransform()).into(imgProfile);
                                                 }
                                         );
                             }else{
@@ -117,12 +156,54 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                                         .addOnSuccessListener(
                                                 command1 -> {
                                                     String url = command1.toString();
-                                                    Glide.with(this).load(url).centerCrop().into(imgProfile);
+                                                    Glide.with(this).load(url).apply(RequestOptions.circleCropTransform()).into(imgProfile);
                                                 }
                                         );
                             }
 
                         }
                 );
+    }
+
+    public void cargarEventos(String start){
+        db.collection("users").document(FirebaseAuth.getInstance().getUid()).get()
+                .addOnSuccessListener(
+                        command -> {
+                            User u = command.toObject(User.class);
+                            db.collection("events").get().addOnSuccessListener(
+                                    command1 -> {
+                                        for(DocumentSnapshot doc: command1.getDocuments()){
+                                            Event event = doc.toObject(Event.class);
+                                            db.collection("events").document(event.getIdEvent()).collection("eventParticipants").whereEqualTo("id",u.getUserId()).get()
+                                                    .addOnSuccessListener(
+                                                            command2 -> {
+                                                                for(DocumentSnapshot doc1: command1.getDocuments()){
+                                                                    Event event1 = doc1.toObject(Event.class);
+                                                                    db.collection("events").document(event1.getIdEvent()).collection("eventParticipants").orderBy("events").limit(3).startAt(start).get()
+                                                                            .addOnSuccessListener(
+                                                                                    command3 -> {
+                                                                                        for(DocumentSnapshot doc2: command1.getDocuments()) {
+                                                                                            Event event2 = doc2.toObject(Event.class);
+                                                                                            adapter.addEvent(event2);
+                                                                                            System.out.println(adapter.getItemCount());
+                                                                                        }
+                                                                                    }
+                                                                            ).addOnFailureListener(
+                                                                                    command3 -> {
+                                                                                        Toast.makeText(getContext(), "No tienes eventos registrados", Toast.LENGTH_SHORT).show();
+                                                                                    }
+                                                                    );
+
+                                                                }
+
+                                                            }
+                                                    );
+                                        }
+
+                                    }
+                            );
+                        }
+                );
+
     }
 }

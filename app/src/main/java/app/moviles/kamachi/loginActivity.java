@@ -14,6 +14,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+
+import app.moviles.kamachi.model.Event;
+import app.moviles.kamachi.model.EventType;
+import app.moviles.kamachi.model.Participant;
+import app.moviles.kamachi.model.User;
+import app.moviles.kamachi.model.UserType;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -23,6 +31,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private Button registerBtn;
 
     private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +49,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(i);
         }
 
+
         auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
 
         editTextPersonName = findViewById(R.id.editTextPersonName);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -48,6 +60,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         registerBtn = findViewById(R.id.registerBtn);
         loginBtn.setOnClickListener(this);
         registerBtn.setOnClickListener(this);
+
 
     }
 
@@ -84,4 +97,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             Log.e(">>>", "empty");
         }
     }
+
+
 }

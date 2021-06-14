@@ -10,7 +10,7 @@ public class Event {
     private String idEvent;
     private String eventName;
     private String description;
-    private Date dateEvent;
+    private long dateEvent;
     private EventType type;
     private String url;
     private double price;
@@ -34,11 +34,11 @@ public class Event {
         this.eventImage = eventImage;
     }
 
-    public Event(String eventName, String description, Date dateEvent, EventType type, String url, double price, int maxParticipants) {
+    public Event(String eventName, String description, EventType type, String url, double price, int maxParticipants) {
         this.idEvent = UUID.randomUUID().toString();
         this.eventName = eventName;
         this.description = description;
-        this.dateEvent = dateEvent;
+        this.dateEvent = new Date().getTime();
         this.type = type;
         this.url = url;
         this.price = price;
@@ -66,7 +66,7 @@ public class Event {
         return description;
     }
 
-    public Date getDateEvent() {
+    public long getDateEvent() {
         return dateEvent;
     }
 
@@ -102,7 +102,7 @@ public class Event {
         this.description = description;
     }
 
-    public void setDateEvent(Date dateEvent) {
+    public void setDateEvent(long dateEvent) {
         this.dateEvent = dateEvent;
     }
 

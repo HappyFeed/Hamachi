@@ -2,6 +2,7 @@ package app.moviles.kamachi.model;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,14 +13,30 @@ import app.moviles.kamachi.R;
 public class EventView extends RecyclerView.ViewHolder {
 
     private ConstraintLayout root;
-    private TextView nameEvent;
-    private Button information;
+    private TextView nameTextView;
+    private Button informationBtn;
+    private ImageView imgEvent;
+    private ImageView imageViewColabPic;
 
     public EventView(ConstraintLayout root) {
         super(root);
         this.root = root;
-        nameEvent = root.findViewById(R.id.nameTextView);
-        information = root.findViewById(R.id.informationBtn);
+        nameTextView = root.findViewById(R.id.nameTextView);
+        informationBtn = root.findViewById(R.id.informationBtn);
+        imgEvent = root.findViewById(R.id.imgEvent);
+        imageViewColabPic = root.findViewById(R.id.imageViewColabPic);
+    }
+
+    public ImageView getImgEvent() {
+        return imgEvent;
+    }
+
+    public TextView getNameTextView() {
+        return nameTextView;
+    }
+
+    public ImageView getImageViewColabPic() {
+        return imageViewColabPic;
     }
 
     public ConstraintLayout getRoot() {
@@ -31,18 +48,26 @@ public class EventView extends RecyclerView.ViewHolder {
     }
 
     public TextView getNameEvent() {
-        return nameEvent;
+        return nameTextView;
     }
 
     public void setNameEvent(TextView nameEvent) {
-        this.nameEvent = nameEvent;
+        this.nameTextView = nameEvent;
     }
 
     public Button getInformation() {
-        return information;
+        return informationBtn;
     }
 
     public void setInformation(Button information) {
-        this.information = information;
+        this.informationBtn = information;
+    }
+
+    public void setImgEvent(ImageView imgEvent) {
+        this.imgEvent = imgEvent;
+    }
+
+    public void setImageViewColabPic(ImageView imageViewColabPic) {
+        this.imageViewColabPic = imageViewColabPic;
     }
 }
