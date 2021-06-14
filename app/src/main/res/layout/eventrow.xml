@@ -7,7 +7,7 @@
     android:textAlignment="textStart">
 
     <Button
-        android:id="@+id/informationBtn"
+        android:id="@+id/informationBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -18,38 +18,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgEvent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgEvent2" />
 
     <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/nameTextView2"
+        android:layout_width="195dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="44dp"
         android:text="Nombre Instructor"
+        android:textAlignment="viewStart"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/imageViewColabPic"
+        app:layout_constraintStart_toEndOf="@+id/imageViewColabPic2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imgEvent"
+        android:id="@+id/imgEvent2"
         android:layout_width="408dp"
         android:layout_height="291dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView2"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/imageViewColabPic"
+        android:id="@+id/imageViewColabPic2"
         android:layout_width="64dp"
         android:layout_height="61dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="19dp"
-        app:layout_constraintEnd_toStartOf="@+id/nameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/nameTextView2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

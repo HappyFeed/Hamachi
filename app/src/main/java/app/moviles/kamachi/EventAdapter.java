@@ -29,12 +29,21 @@ public class EventAdapter extends RecyclerView.Adapter<EventView> {
     private FirebaseFirestore db;
     private FirebaseStorage storage;
     private View row;
+    private OnItemClick listener;
 
     public EventAdapter(){
         events = new ArrayList<>();
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
+    }
+
+    public interface OnItemClick{
+        void OnEventItemClick(Event e);
+    }
+
+    public void setListener(OnItemClick onItemClick){
+        listener = onItemClick;
     }
 
     @NonNull
@@ -49,7 +58,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventView> {
 
     @Override
     public void onBindViewHolder(@NonNull EventView holder, int position) {
-        Log.e(">>>","entro aqui");
+        holder.getInformation().setOnClickListener(
+                v -> {
+                    if(listener != null){
+                        listener.OnEventItemClick(events.get(position));
+                    }
+                }
+        );
         db.collection("users").document(events.get(position).getEventOwnerId()).get()
                 .addOnSuccessListener(
                         command -> {

@@ -1,11 +1,9 @@
 package app.moviles.kamachi.model;
 
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import app.moviles.kamachi.R;
@@ -21,10 +19,10 @@ public class EventView extends RecyclerView.ViewHolder {
     public EventView(ConstraintLayout root) {
         super(root);
         this.root = root;
-        nameTextView = root.findViewById(R.id.nameTextView);
-        informationBtn = root.findViewById(R.id.informationBtn);
-        imgEvent = root.findViewById(R.id.imgEvent);
-        imageViewColabPic = root.findViewById(R.id.imageViewColabPic);
+        nameTextView = root.findViewById(R.id.nameTextView2);
+        informationBtn = root.findViewById(R.id.informationBtn2);
+        imgEvent = root.findViewById(R.id.imgEvent2);
+        imageViewColabPic = root.findViewById(R.id.imageViewColabPic2);
     }
 
     public ImageView getImgEvent() {

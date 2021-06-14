@@ -7,17 +7,33 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.Date;
+
+import app.moviles.kamachi.model.Event;
+import app.moviles.kamachi.model.User;
 
 
-public class FragmentUpcomingEvent extends Fragment implements View.OnClickListener {
+public class FragmentUpcomingEvent extends Fragment {
 
     private RecyclerView listView;
     private LinearLayoutManager layoutManger;
     private EventUpcomingAdapter adapter;
+
+    private FirebaseAuth auth;
+    private FirebaseStorage storage;
+    private FirebaseFirestore db;
 
     public FragmentUpcomingEvent() {
         // Required empty public constructor
@@ -36,23 +52,54 @@ public class FragmentUpcomingEvent extends Fragment implements View.OnClickListe
         View root = inflater.inflate(R.layout.fragment_upcoming_event, container, false);
         listView = root.findViewById(R.id.listView);
 
+        auth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         layoutManger = new LinearLayoutManager(getContext());
         listView.setLayoutManager(layoutManger);
 
         adapter = new EventUpcomingAdapter();
         listView.setAdapter(adapter);
 
+        cargarEventos( new Date(2021, 01,01).getTime());
+
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled( RecyclerView recyclerView, int dx, int dy) {
+                if(!recyclerView.canScrollVertically(-1)&& dy<0){
+                    Log.e(">>>", "TOP");
+                }else if(!recyclerView.canScrollVertically(1)&& dy>0){
+                    Log.e(">>>", "BOTTOM");
+                    long ultimo = adapter.lastOne();
+                    cargarEventos(ultimo);
+
+                }
+            }
+        });
 
         return root;
     }
 
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
 
-        }
 
+    public void cargarEventos(long start){
+        db.collection("events").limit(3).get()
+                .addOnSuccessListener(
+                        command -> {
+                            for(DocumentSnapshot doc2: command.getDocuments()) {
+                                Event event2 = doc2.toObject(Event.class);
+                                adapter.addEvent(event2);
+
+                            }
+                        }
+                ).addOnFailureListener(
+                command3 -> {
+                    Toast.makeText(getContext(), "No tienes eventos CERCA", Toast.LENGTH_SHORT).show();
+                }
+        );
     }
 }
 

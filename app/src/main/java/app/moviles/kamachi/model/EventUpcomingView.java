@@ -11,16 +11,18 @@ import app.moviles.kamachi.R;
 public class EventUpcomingView extends RecyclerView.ViewHolder{
 
         private ConstraintLayout root;
-        private TextView nameInstructor;
-        private ImageView img;
-        private Button inscritionButton;
+        private TextView nameTextView2;
+        private Button informationBtn2;
+        private ImageView imgEvent2;
+        private ImageView imageViewColabPic2;
 
         public EventUpcomingView(ConstraintLayout root) {
             super(root);
             this.root = root;
-            nameInstructor= root.findViewById(R.id.nameInstructor);
-            img = root.findViewById(R.id.img);
-            inscritionButton = root.findViewById(R.id.inscriptionButton);
+            nameTextView2 = root.findViewById(R.id.nameTextView2);
+            informationBtn2 = root.findViewById(R.id.informationBtn2);
+            imgEvent2 = root.findViewById(R.id.imgEvent2);
+            imageViewColabPic2 = root.findViewById(R.id.imageViewColabPic2);
         }
 
         public ConstraintLayout getRoot() {
@@ -31,27 +33,35 @@ public class EventUpcomingView extends RecyclerView.ViewHolder{
             this.root = root;
         }
 
-    public TextView getNameInstructor() {
-        return nameInstructor;
+    public TextView getNameTextView() {
+        return nameTextView2;
     }
 
-    public void setNameInstructor(TextView nameInstructor) {
-        this.nameInstructor = nameInstructor;
+    public Button getInformationBtn() {
+        return informationBtn2;
     }
 
-    public ImageView getImg() {
-        return img;
+    public ImageView getImgEvent() {
+        return imgEvent2;
     }
 
-    public void setImg(ImageView img) {
-        this.img = img;
+    public ImageView getImageViewColabPic() {
+        return imageViewColabPic2;
     }
 
-    public Button getInscritionButton() {
-        return inscritionButton;
+    public void setNameTextView(TextView nameTextView) {
+        this.nameTextView2 = nameTextView;
     }
 
-    public void setInscritionButton(Button inscritionButton) {
-        this.inscritionButton = inscritionButton;
+    public void setInformationBtn(Button informationBtn) {
+        this.informationBtn2 = informationBtn;
+    }
+
+    public void setImgEvent(ImageView imgEvent) {
+        this.imgEvent2 = imgEvent;
+    }
+
+    public void setImageViewColabPic(ImageView imageViewColabPic) {
+        this.imageViewColabPic2 = imageViewColabPic;
     }
 }

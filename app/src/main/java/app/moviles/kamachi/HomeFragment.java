@@ -1,5 +1,7 @@
 package app.moviles.kamachi;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -21,6 +23,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.Date;
 import java.util.zip.Inflater;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,7 +37,7 @@ import app.moviles.kamachi.model.UserType;
 import app.moviles.kamachi.repository.UserRepositoryInterface;
 import app.moviles.kamachi.repository.UserRepositoyImpl;
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener, EventAdapter.OnItemClick {
 
     private Button btnOptions;
     private TextView namePtxt;
@@ -48,10 +51,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private FirebaseStorage storage;
     private FirebaseFirestore db;
 
-    private UserRepositoryInterface uri;
-
     public HomeFragment() {
-        uri = new UserRepositoyImpl();
+
         // Required empty public constructor
     }
 
@@ -71,6 +72,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        //prueba();
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         btnOptions = root.findViewById(R.id.btnOptions);
         namePtxt = root.findViewById(R.id.namePTxt);
@@ -84,6 +87,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         eventViewList.setLayoutManager(layoutManger);
 
         adapter = new EventAdapter();
+        adapter.setListener(this);
         eventViewList.setAdapter(adapter);
 
         cargarEventos("*");
@@ -103,7 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        //prueba();
+
         loadUserInfo();
 
 
@@ -123,12 +127,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void prueba(){
         System.out.println("entro a la prueba");
         User u = new User("qwe", "vojabes", "vojabes@gmail.com","123","123456", UserType.collaborator);
-        Event e = new Event("prueba", "prueba vojabes", EventType.YOGA,null,2000,10);
+        Event e = new Event("prueba2", "prueba2 vojabes", EventType.COACHING,"zoom://",2000,10);
         e.setEventOwnerId(u.getUserId());
-        db.collection("users").document(u.getUserId()).set(u);
         db.collection("events").document(e.getIdEvent()).set(e);
-        db.collection("events").document(e.getIdEvent()).collection("eventParticipants").document(FirebaseAuth.getInstance().getUid()).set(new Participant(FirebaseAuth.getInstance().getUid(), "alejo","a@co.com"));
-
     }
 
     public void loadUserInfo(){
@@ -177,32 +178,45 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                                             db.collection("events").document(event.getIdEvent()).collection("eventParticipants").whereEqualTo("id",u.getUserId()).get()
                                                     .addOnSuccessListener(
                                                             command2 -> {
-                                                                for(DocumentSnapshot doc1: command1.getDocuments()){
-                                                                    Event event1 = doc1.toObject(Event.class);
-                                                                    db.collection("events").document(event1.getIdEvent()).collection("eventParticipants").orderBy("events").limit(3).startAt(start).get()
-                                                                            .addOnSuccessListener(
-                                                                                    command3 -> {
-                                                                                        for(DocumentSnapshot doc2: command1.getDocuments()) {
-                                                                                            Event event2 = doc2.toObject(Event.class);
-                                                                                            adapter.addEvent(event2);
-                                                                                            System.out.println(adapter.getItemCount());
-                                                                                        }
-                                                                                    }
-                                                                            ).addOnFailureListener(
-                                                                                    command3 -> {
-                                                                                        Toast.makeText(getContext(), "No tienes eventos registrados", Toast.LENGTH_SHORT).show();
-                                                                                    }
-                                                                    );
-
+                                                                for(DocumentSnapshot doc1: command2.getDocuments()){
+                                                                    Participant participant = doc1.toObject(Participant.class);
+                                                                    if(participant != null){
+                                                                        adapter.addEvent(event);
+                                                                        System.out.println(adapter.getItemCount());
+                                                                    }
                                                                 }
-
                                                             }
-                                                    );
+                                                    ).addOnFailureListener(
+                                                    command3 -> {
+                                                        Toast.makeText(getContext(), "No tienes eventos registrados", Toast.LENGTH_SHORT).show();
+                                                    }
+                                            );
                                         }
 
                                     }
                             );
                         }
+                );
+
+    }
+
+    @Override
+    public void OnEventItemClick(Event e) {
+        final CharSequence[] info = { "Regresar"};
+       final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+       builder.setTitle("Informacion");
+        db.collection("users").document(e.getEventOwnerId()).get()
+                .addOnSuccessListener(
+                    command -> {
+                        User u = command.toObject(User.class);
+                        builder.setMessage("Instructor: "+ u.getUserName()+"\n"
+                                + "Nombre: "+e.getEventName()+"\n"
+                                + "Descripcion: "+e.getDescription()+"\n"
+                                + "Categoria: "+e.getType()+"\n"
+                                + "Fecha: "+new Date(e.getDateEvent())+"\n"
+                                + "Url: "+e.getUrl());
+                        builder.show();
+                    }
                 );
 
     }
