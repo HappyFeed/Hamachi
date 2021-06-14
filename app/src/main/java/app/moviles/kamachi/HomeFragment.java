@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Even
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        //prueba();
+        prueba();
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         btnOptions = root.findViewById(R.id.btnOptions);
@@ -126,9 +126,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Even
 
     public void prueba(){
         System.out.println("entro a la prueba");
-        User u = new User("qwe", "vojabes", "vojabes@gmail.com","123","123456", UserType.collaborator);
-        Event e = new Event("prueba2", "prueba2 vojabes", EventType.COACHING,"zoom://",2000,10);
+        User u = new User("asdasdasd", "Juanito", "vojabes2@gmail.com","123","123456", UserType.collaborator);
+        Event e = new Event("Mental health", "prueba2 vojabes", EventType.MENTAL_HEALTH,"zoom://",1000,10);
         e.setEventOwnerId(u.getUserId());
+        db.collection("users").document(u.getUserId()).set(u);
         db.collection("events").document(e.getIdEvent()).set(e);
     }
 

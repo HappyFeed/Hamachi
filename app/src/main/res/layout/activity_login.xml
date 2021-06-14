@@ -47,7 +47,7 @@
         android:background="@drawable/style_border"
         android:backgroundTint="#C4C4C4"
         android:ems="10"
-        android:hint="   Usuario"
+        android:hint="Email"
         android:inputType="textPersonName"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,29 +64,17 @@
         android:background="@drawable/style_border"
         android:backgroundTint="#C4C4C4"
         android:ems="10"
-        android:hint="  Contraseña"
+        android:hint="Contraseña"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPersonName" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="120dp"
-        android:text="Recordar mi contraseña"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
-
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="207dp"
         android:layout_height="54dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="87dp"
         android:background="@drawable/style_border"
         android:backgroundTint="@color/teal_700"
         android:fontFamily="@font/poppinsregular"
@@ -96,7 +84,7 @@
         app:cornerRadius="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <Button
         android:id="@+id/registerBtn"

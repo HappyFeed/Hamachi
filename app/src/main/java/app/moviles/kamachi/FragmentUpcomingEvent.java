@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,9 +26,10 @@ import app.moviles.kamachi.model.Event;
 import app.moviles.kamachi.model.User;
 
 
-public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdapter.OnRegistClick {
+public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdapter.OnRegistClick, SearchView.OnQueryTextListener {
 
     private RecyclerView listView;
+    private SearchView searchView;
     private LinearLayoutManager layoutManger;
     private EventUpcomingAdapter adapter;
 
@@ -51,10 +53,12 @@ public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdap
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_upcoming_event, container, false);
         listView = root.findViewById(R.id.listView);
+        searchView = root.findViewById(R.id.searchView);
 
         auth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
+
 
         layoutManger = new LinearLayoutManager(getContext());
         listView.setLayoutManager(layoutManger);
@@ -62,6 +66,8 @@ public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdap
         adapter = new EventUpcomingAdapter();
         adapter.setListener(this);
         listView.setAdapter(adapter);
+
+        searchView.setOnQueryTextListener(this);
 
         cargarEventos( new Date(2021, 01,01).getTime());
 
@@ -109,5 +115,17 @@ public class FragmentUpcomingEvent extends Fragment implements EventUpcomingAdap
         i.putExtra("event", e);
         startActivity(i);
     }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.filter(newText);
+        return false;
+    }
+
 }
 

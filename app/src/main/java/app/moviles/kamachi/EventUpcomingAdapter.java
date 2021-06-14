@@ -1,10 +1,13 @@
 package app.moviles.kamachi;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -24,6 +27,7 @@ import app.moviles.kamachi.model.User;
 public class EventUpcomingAdapter extends RecyclerView.Adapter<EventUpcomingView> {
 
     private ArrayList<Event> events;
+    private ArrayList<Event> originalEvents;
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private FirebaseStorage storage;
@@ -32,6 +36,7 @@ public class EventUpcomingAdapter extends RecyclerView.Adapter<EventUpcomingView
 
     public EventUpcomingAdapter() {
         events = new ArrayList<>();
+        originalEvents = new ArrayList<>();
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
@@ -122,11 +127,36 @@ public class EventUpcomingAdapter extends RecyclerView.Adapter<EventUpcomingView
 
     public void addEvent(Event event){
         events.add(event);
+        originalEvents.addAll(events);
         notifyDataSetChanged();
     }
 
     public interface OnRegistClick{
         void OnEventRegisItemClick(Event e);
+    }
+
+    public void filter(String strSearch){
+        if(strSearch.length() == 0){
+            events.clear();
+            events.addAll(originalEvents);
+        }else{
+             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                  List<Event> collect = events.stream()
+                         .filter(i -> i.getEventName().toLowerCase().contains(strSearch))
+                         .collect(Collectors.toList());
+                  
+                  events.clear();
+                  events.addAll(collect);
+             }else{
+                 events.clear();
+                 for (Event i: originalEvents) {
+                     if(i.getEventName().toLowerCase().contains(strSearch)){
+                         events.add(i);
+                     }
+                 }
+             }
+        }
+        notifyDataSetChanged();
     }
 
     public void setListener(EventUpcomingAdapter.OnRegistClick onRegistClick){
