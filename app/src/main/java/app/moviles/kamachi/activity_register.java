@@ -42,7 +42,7 @@ public class activity_register extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        getSupportActionBar().hide();
         uri = new UserRepositoyImpl();
 
         editTextUserName = findViewById(R.id.editTextUserName);

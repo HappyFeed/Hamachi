@@ -53,6 +53,7 @@ public class activity_editprofile extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_editprofile);
 
         auth = FirebaseAuth.getInstance();

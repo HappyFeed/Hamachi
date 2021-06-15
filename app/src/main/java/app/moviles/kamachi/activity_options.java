@@ -25,7 +25,7 @@ public class activity_options extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
-
+        getSupportActionBar().hide();
         buttonReturn = findViewById(R.id.buttonReturn);
         homeBtn = findViewById(R.id.homeBtn);
         eventBtn = findViewById(R.id.eventBtn);
